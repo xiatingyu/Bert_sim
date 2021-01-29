@@ -1,0 +1,17 @@
+{
+    "train_data": "../../data/preprocessed/MSRP/train_data.pkl",
+    "valid_data": "../../data/preprocessed/MSRP/dev_data.pkl",
+    "test_data": "../../data/preprocessed/MSRP/test_data.pkl",
+    "embeddings": "../../data/preprocessed/MSRP/embeddings.pkl",
+
+    "target_dir": "../../data/checkpoints/MSRP",
+    
+    "hidden_size": 300,
+    "dropout": 0.5,
+    "num_classes": 2,
+    "epochs": 50,
+    "batch_size": 32,
+    "lr": 0.0004,
+    "patience": 5,
+    "max_gradient_norm": 5.0
+}

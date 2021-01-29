@@ -1,0 +1,18 @@
+{
+    "train_data": "../../data/preprocessed/QUORA/train_data.pkl",
+    "valid_data": "../../data/preprocessed/QUORA/dev_data.pkl",
+    "test_data": "../../data/preprocessed/QUORA/test_data.pkl",
+    "embeddings": "../../data/preprocessed/QUORA/embeddings.pkl",
+
+    "target_dir": "../../data/checkpoints/QUORA",
+    
+    "hidden_size": 300,
+    "dropout": 0.5,
+    "num_classes": 2,
+
+    "epochs": 20,
+    "batch_size": 32,
+    "lr": 0.0004,
+    "patience": 5,
+    "max_gradient_norm": 5.0
+}

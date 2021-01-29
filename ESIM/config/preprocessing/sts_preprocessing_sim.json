@@ -1,0 +1,14 @@
+{
+    "data_dir": "../../data/dataset/sts",
+    "embeddings_file": "../../data/embeddings/glove.840B.300d.txt",
+    "target_dir": "../../data/preprocessed/STS-sim",
+
+    "lowercase": false,
+    "ignore_punctuation": false,
+    "num_words": null,
+    "stopwords": [],
+    "labeldict": {},
+    "bos": "_BOS_",
+    "eos": "_EOS_",
+        "task": "sts"
+}

@@ -1,0 +1,18 @@
+{
+    "train_data": "../../data/preprocessed/STS-sim/train_data.pkl",
+    "valid_data": "../../data/preprocessed/STS-sim/dev_data.pkl",
+    "test_data": "../../data/preprocessed/STS-sim/test_data.pkl",
+    "embeddings": "../../data/preprocessed/STS-sim/embeddings.pkl",
+
+    "target_dir": "../../data/checkpoints/STS-sim",
+    
+    "hidden_size": 300,
+    "dropout": 0.5,
+    "num_classes": 1,
+
+    "epochs": 30,
+    "batch_size": 32,
+    "lr": 0.0004,
+    "patience": 5,
+    "max_gradient_norm": 5.0
+}

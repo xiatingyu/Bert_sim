@@ -1,0 +1,20 @@
+{
+    "train_data": "../../data/preprocessed/MedNLI/train_data.pkl",
+    "valid_data": "../../data/preprocessed/MedNLI/dev_data.pkl",
+    "test_data": "../../data/preprocessed/MedNLI/test_data.pkl",
+    "train_embeddings": "../../data/preprocessed/MedNLI/train_elmo.pkl",
+    "valid_embeddings": "../../data/preprocessed/MedNLI/dev_elmo.pkl",
+    "test_embeddings": "../../data/preprocessed/MedNLI/test_elmo.pkl",
+        "embedding_dim": 1024,
+    "target_dir": "../../data/checkpoints/MedNLI",
+    
+    "hidden_size": 300,
+    "dropout": 0.5,
+    "num_classes": 3,
+
+    "epochs": 64,
+    "batch_size": 32,
+    "lr": 0.0004,
+    "patience": 5,
+    "max_gradient_norm": 10.0
+}
