@@ -8,13 +8,21 @@ ESIM
 
 3.Then run the `preprocess_msrp.py` file in the preprocessing folder to preprocess the data.<br>
 
-5.Run under the `ESIM/scripts/training` folder <br><br>
+5.Run under the `ESIM/scripts/training` folder. <br><br>
 ```python
 main_msrp.py --proportion 0.1 --output 10
 ```
 `--proportion` specifies the size of the dataset, `--output` determines the storage location of models trained on datasets of different sizes, where 10 is 10% of the data<br>
-You can run `python main_msrp.py` directly, and use the default 100% data at this time<br><br>
+You can run `python main_msrp.py` directly, and use the default 100% data at this time.<br><br>
 
-[Here](https://drive.google.com/file/d/1KshPlBu7StLaASJOBsXzp4HTTYzR75CS/view?usp=sharing) is the data we have processed, Please place it under the `ESIM/data/dataset` folder after downloading<br>
+[Here](https://drive.google.com/file/d/1DZxRzZ6giKaZp6q5s44oogjrGLxCKu4N/view?usp=sharing) is the data we have processed, Please place it under the `ESIM/data/dataset` folder after downloading.<br>
 
-We use glove.840B.300d.txt as embedding, which can be downloaded [here](https://www.kaggle.com/takuok/glove840b300dtxt?select=glove.840B.300d.txt), and then please put it in the `ESIM\data\embeddings` folder<br>
+We use **glove.840B.300d** as embedding, which can be downloaded [here](https://www.kaggle.com/takuok/glove840b300dtxt?select=glove.840B.300d.txt), and then please put it in the `ESIM\data\embeddings` folder.<br>
+
+
+BERT
+----
+1.Download the data we have processed, and put it in the `UER/datasets` folder, Or you can use the `get_similarity.py` file in **ESIM** to preprocess the data.<br>
+
+2.The data we provide cannot be directly used in the BERT model, so further preprocessing is required to adapt to the structure of the BERT model, use `get_similarity.py` in UER folder to further preprocess the data.<br>
+
