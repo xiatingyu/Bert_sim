@@ -7,7 +7,7 @@ ESIM
 1.First, you can use the `get_similarity.py` file in the `ESIM/scripts/preprocessing` folder to obtain the similarity matrix of the `msrp/sts/url dataset`. You can also use the matrix we have built, then this step can be skipped.<br>
 2.Then run the `preprocess_msrp.py` file in the preprocessing folder to preprocess the data<br>
 3.Run under the `ESIM/scripts/training` folder <br>
-`<python main_msrp.py --proportion 0.1 --output 10>`<br>
+```python main_msrp.py --proportion 0.1 --output 10```<br>
 Proportion specifies the size of the data set, output determines the output model to the folder corresponding to different data sets, where 10 is 10% of the data<br>
 You can run `<python main_msrp.py directly>`, and use the default 100% data at this time<br>
 
