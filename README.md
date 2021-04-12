@@ -10,4 +10,6 @@ ESIM
 Proportion specifies the size of the data set, output determines the output model to the folder corresponding to different data sets, where 10 is 10% of the data<br>
 You can run python main_msrp.py directly, and use the default 100% data at this time<br>
 
-[Here](https://drive.google.com/file/d/1KshPlBu7StLaASJOBsXzp4HTTYzR75CS/view?usp=sharing) is the data we have processed, Please place it under the ESIM/data/dataset folder after downloading
+[Here](https://drive.google.com/file/d/1KshPlBu7StLaASJOBsXzp4HTTYzR75CS/view?usp=sharing) is the data we have processed, Please place it under the ESIM/data/dataset folder after downloading<br>
+
+We use glove.840B.300d.txt as embedding, which can be downloaded [here](https://www.kaggle.com/takuok/glove840b300dtxt?select=glove.840B.300d.txt), and then please put it in the ESIM\data\embeddings folder<br>
