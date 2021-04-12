@@ -274,7 +274,7 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     # Path options.
-    parser.add_argument("--pretrained_model_path", default="./models/google_model_en_uncased_base.bin", type=str,
+    parser.add_argument("--pretrained_model_path", default="./models/English_uncased_base_model.bin", type=str,
                         help="Path of the pretrained model.")
     parser.add_argument("--output_model_path", default="./models/classifier_model.bin", type=str,
                         help="Path of the output model.")
@@ -288,7 +288,7 @@ def main():
                         help="Path of the testset.")
     parser.add_argument("--pred_path", type=str,
                         help="Path of the testset.")
-    parser.add_argument("--proportion", type=float, required=True,
+    parser.add_argument("--proportion", type=float, required=True, default=1.0,
                         help="Path of the testset.")
     parser.add_argument("--config_path", default="./models/bert_base_config.json", type=str,
                         help="Path of the config file.")
@@ -324,7 +324,7 @@ def main():
                         help="Learning rate.")
     parser.add_argument("--warmup", type=float, default=0.1,
                         help="Warm up value.")
-    parser.add_argument("--fp16", action='store_true',default=True,
+    parser.add_argument("--fp16", action='store_true',default=False,
                         help="Whether to use 16-bit (mixed) precision (through NVIDIA apex) instead of 32-bit.")
     parser.add_argument("--fp16_opt_level", choices=["O0", "O1", "O2", "O3"], default='O1',
                         help="For fp16: Apex AMP optimization level selected in ['O0', 'O1', 'O2', and 'O3']."
@@ -333,7 +333,7 @@ def main():
     # Training options.
     parser.add_argument("--dropout", type=float, default=0.5,
                         help="Dropout.")
-    parser.add_argument("--epochs_num", type=int, default=3,
+    parser.add_argument("--epochs_num", type=int, default=30,
                         help="Number of epochs.")
     parser.add_argument("--report_steps", type=int, default=1000,
                         help="Specific steps to print prompt.")
@@ -362,7 +362,8 @@ def main():
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = model.to(args.device)
     args.model = model
-    freeze(model)
+
+    #freeze(model)
 
     # Build tokenizer.
     args.tokenizer = globals()[args.tokenizer.capitalize() + "Tokenizer"](args)
@@ -384,7 +385,7 @@ def main():
     else:
         soft_tgt = None
 
-    print(soft_tgt)
+    #print(soft_tgt)
     args.train_steps = int(instances_num * args.epochs_num / batch_size) + 1
 
     print("Batch size: ", batch_size)

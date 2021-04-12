@@ -81,7 +81,7 @@ def load_STS_data():
 
 
 def load_MRPC_data():
-    for task in ['train', 'dev', 'test']:
+    for task in ['train', 'dev']:
         f = open('../../data/dataset/msrp/MRPC/{}.tsv'.format(task), 'r', encoding='utf-8')
         text_a, text_b, labels = [], [], []
         lines = f.readlines()
@@ -97,6 +97,23 @@ def load_MRPC_data():
         train["text_b"] = text_b
         train["labels"] = labels
         train.to_csv('../../data/dataset/msrp/{}.tsv'.format(task), sep='\t', index=False)
+
+    f = open('../../data/dataset/msrp/MRPC/msr_paraphrase_test.txt', 'r', encoding='utf-8')
+    text_a, text_b, labels = [], [], []
+    lines = f.readlines()
+    for i in range(len(lines)):
+        line = lines[i].strip().split('\t')
+        if i > 0 and len(line) == 5:
+            text_a.append(line[3])
+            text_b.append(line[4])
+            labels.append(line[0])
+    train = pd.DataFrame(columns=['text_a', 'text_b', 'labels'])
+    train["text_a"] = text_a
+    train["text_b"] = text_b
+    train["labels"] = labels
+    train.to_csv('../../data/dataset/msrp/test.tsv', sep='\t', index=False)
+
+
     return
 
 
