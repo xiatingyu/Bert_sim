@@ -343,7 +343,7 @@ def main():
     # Load the hyperparameters from the config file.
     args = load_hyperparam(args)
     print(args.dropout)
-    #set_seed(args.seed)
+
 
     # Count the number of labels.
     args.labels_num = count_labels_num(args.train_path)
