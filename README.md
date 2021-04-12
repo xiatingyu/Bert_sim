@@ -4,13 +4,15 @@ This repository restore the sorce code and datasets for "Using Prior Knowledge t
 
 ESIM
 ----
-1.First, you can use the `get_similarity.py` file in the `ESIM/scripts/preprocessing` folder to obtain the similarity matrix of the `msrp/sts/url dataset`. You can also use the matrix we have built, then this step can be skipped.<br><br>
-2.Then run the `preprocess_msrp.py` file in the preprocessing folder to preprocess the data<br><br>
-3.Run under the `ESIM/scripts/training` folder <br><br>
+1.First, you can use the `get_similarity.py` file in the `ESIM/scripts/preprocessing` folder to obtain the similarity matrix of the **msrp/sts/url** dataset. For **QQP** dataset, you should use `get_similarity_quora.py`. You can also use the matrix we have built, then this step can be skipped.<br>
+
+3.Then run the `preprocess_msrp.py` file in the preprocessing folder to preprocess the data.<br>
+
+5.Run under the `ESIM/scripts/training` folder <br><br>
 ```python
 main_msrp.py --proportion 0.1 --output 10
 ```
-Proportion specifies the size of the data set, output determines the output model to the folder corresponding to different data sets, where 10 is 10% of the data<br>
+`--proportion` specifies the size of the dataset, `--output` determines the storage location of models trained on datasets of different sizes, where 10 is 10% of the data<br>
 You can run `python main_msrp.py` directly, and use the default 100% data at this time<br><br>
 
 [Here](https://drive.google.com/file/d/1KshPlBu7StLaASJOBsXzp4HTTYzR75CS/view?usp=sharing) is the data we have processed, Please place it under the `ESIM/data/dataset` folder after downloading<br>
