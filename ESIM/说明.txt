@@ -1,0 +1,11 @@
+首先可以用scripts/preprocessing文件夹下的get_similarity.py文件获取msrp.sts.url的相似性矩阵
+也可以用我们已经构建好的矩阵，那么这步可以略过
+然后运行preprocessing文件夹下 preprocess_msrp.py文件，数据预处理
+
+最后
+在scripts/training文件夹下运行
+python main_msrp.py --proportion 0.1 --output 10
+
+proportion 指定数据集大小，output决定输出模型到不同数据集对应的文件夹下，这里10就是10%数据
+
+可以直接运行python main_msrp.py ，这时候使用默认100%的数据

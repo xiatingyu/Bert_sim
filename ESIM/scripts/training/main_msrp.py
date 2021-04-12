@@ -287,10 +287,9 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint",
                         default=None,
                         help="Path to a checkpoint file to resume training")
-    parser.add_argument("--proportion", required=True, type=float,
+    parser.add_argument("--proportion", default=0.1, type=float,
                         help="{Proportion of training data}")
-    parser.add_argument("--output",
-                        default=None, type=str, required=True,
+    parser.add_argument("--output", type=str, default='100',
                         help="where to Save model")
     args = parser.parse_args()
 

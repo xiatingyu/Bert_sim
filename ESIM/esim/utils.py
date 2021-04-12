@@ -38,11 +38,11 @@ def sort_by_seq_lens(batch, sequences_lengths, descending=True):
     sorted_batch = batch.index_select(0, sorting_index)
 
     idx_range =\
-        sequences_lengths.new_tensor(torch.arange(0, len(sequences_lengths)))
+        sequences_lengths.new_tensor(torch.arange(0, len(sequences_lengths))).to(sequences_lengths.device)
     _, reverse_mapping = sorting_index.sort(0, descending=False)
     restoration_index = idx_range.index_select(0, reverse_mapping)
 
-    return sorted_batch, sorted_seq_lens, sorting_index, restoration_index
+    return sorted_batch, sorted_seq_lens.cpu(), sorting_index, restoration_index
 
 
 def get_mask(sequences_batch, sequences_lengths):

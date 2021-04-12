@@ -335,7 +335,7 @@ class NLIDataset(Dataset):
                      "hypotheses": torch.ones((self.num_sequences,
                                                self.max_hypothesis_length),
                                               dtype=torch.long) * padding_idx,
-                     "labels": torch.tensor(data["labels"], dtype=torch.float32)}
+                     "labels": torch.tensor(data["labels"], dtype=torch.long)}#if dataset is "STS_B", the dtype is  torch.Float32
 
         for i, premise in enumerate(data["premises"]):
             self.data["ids"].append(data["ids"][i])

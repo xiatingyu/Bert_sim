@@ -385,7 +385,7 @@ class NLIDataset(Dataset):
             train_shuffled = shuffle(train)
             train_shuffled.reset_index(drop=True, inplace=True)
 
-            train = train_shuffled[:length]
+            train = train[:length]
             data = {}
             data["premises"] = list(train["premises"])
             data["hypotheses"] = list(train["hypotheses"])
@@ -411,7 +411,7 @@ class NLIDataset(Dataset):
                      "hypotheses": torch.ones((self.num_sequences,
                                                self.max_hypothesis_length),
                                               dtype=torch.long) * padding_idx,
-                     "labels": torch.tensor(data["labels"], dtype=torch.float32),
+                     "labels": torch.tensor(data["labels"], dtype=torch.long),#if dataset is "STS_B", the dtype is  torch.Float32
                      'similarity': torch.ones((self.num_sequences,self.max_premise_length,
                                                self.max_hypothesis_length),
                                               dtype=torch.float32) * padding_idx}
@@ -427,8 +427,11 @@ class NLIDataset(Dataset):
             right = len(hypothesis)
             self.data["hypotheses"][i][:end] = torch.tensor(hypothesis[:end])
 
+
             similarity = data["similarity"][i]
             similarity = torch.tensor(np.array(eval(similarity)))
+
+
             self.data["similarity"][i, :left, :right] = similarity
 
     def __len__(self):
@@ -445,153 +448,4 @@ class NLIDataset(Dataset):
                 'similarity': self.data["similarity"][index],
                 "label": self.data["labels"][index]}
 
-class MedNLIEmbedding(Dataset):
-    """
-    Dataset class for MedNLI Embeddings.
 
-    The class can be used to read preprocessed datasets where the premises,
-    hypotheses and labels have been transformed to their embedding matrices.
-    (this can be done with the 'preprocess_data' script in the 'scripts'
-    folder of this repository).
-    """
-    def __init__(self,
-                 data,
-                 batch_size=64):
-        """
-        Args:
-            data: A dictionary containing the preprocessed premises,
-                hypotheses and labels of some dataset.
-            batch_size: An integer indicating the batch size the data should
-                be processed in. Defaults to 64
-        """
-        self.batch_size = batch_size
-        self.ndx = 0
-
-        self.num_sequences = len(data["premises"])
-        self.data = data
-
-    def __len__(self):
-        return self.num_sequences
-
-    def __getitem__(self, index):
-        return {"id": self.data["ids"][index],
-                "premises": self.data["premises"][index],
-                "premise_lengths": min(self.data['premises_lengths'][index],
-                                      self.data['max_premise_length']),
-                "hypotheses": self.data["hypotheses"][index],
-                "hypotheses_lengths": min(self.data['hypotheses_lengths'][index],
-                                         self.data['max_hypothesis_length']),
-                "labels": self.data["labels"][index],
-                "similarity": self.data["similarity"][index],
-                "max_premise_length": self.data["max_premise_length"],
-                "max_hypothesis_length": self.data["max_hypothesis_length"]
-                }
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.ndx >= self.num_sequences:
-            self.ndx = 0
-            raise StopIteration
-        else:
-            ndx = self.ndx
-            batch_size = self.batch_size
-            l = self.num_sequences
-            self.ndx = self.ndx + self.batch_size
-            return {
-                "ids": self.data["ids"][ndx:min(ndx + batch_size, l)],
-                "premises": self.data["premises"][ndx:min(ndx + batch_size, l)],
-                "premises_lengths": self.data['premises_lengths'][ndx:min(ndx + batch_size, l)],
-                "hypotheses": self.data["hypotheses"][ndx:min(ndx + batch_size, l)],
-                "hypotheses_lengths": self.data['hypotheses_lengths'][ndx:min(ndx + batch_size, l)],
-                "labels": self.data["labels"][ndx:min(ndx + batch_size, l)],
-                'similarity': self.data["similarity"][ndx:min(ndx + batch_size, l)],
-                "max_premise_length": self.data["max_premise_length"],
-                "max_hypothesis_length": self.data["max_hypothesis_length"]
-            }
-
-    def get_batch(self, ndx):
-        if ndx >= self.num_sequences:
-            ndx = 0
-            raise StopIteration
-        else:
-            batch_size = self.batch_size
-            l = self.num_sequences
-            return {
-                "ids": self.data["ids"][ndx:min(ndx + batch_size, l)],
-                "premises": self.data["premises"][ndx:min(ndx + batch_size, l)],
-                "premises_lengths": self.data['premises_lengths'][ndx:min(ndx + batch_size, l)],
-                "hypotheses": self.data["hypotheses"][ndx:min(ndx + batch_size, l)],
-                "hypotheses_lengths": self.data['hypotheses_lengths'][ndx:min(ndx + batch_size, l)],
-                "labels": self.data["labels"][ndx:min(ndx + batch_size, l)],
-                "similarity": self.data["similarity"][ndx:min(ndx + batch_size, l)],
-                "max_premise_length": self.data["max_premise_length"],
-                "max_hypothesis_length": self.data["max_hypothesis_length"]
-            }
-
-class MedNLIDataset(Dataset):
-    """
-    Dataset class for MedNLI datasets.
-
-    The class can be used to read raw datasets where the premises,
-    hypotheses and labels have been pickled.
-    (this can be done with the 'preprocess_data' script in the 'scripts'
-    folder of this repository).
-    """
-    def __init__(self,
-                 data,
-                 batch_size=64):
-        """
-        Args:
-            data: A dictionary containing the preprocessed premises,
-                hypotheses and labels of some dataset.
-            batch_size: An integer indicating the batch size the data should
-                be processed in. Defaults to 64
-        """
-        self.batch_size = batch_size
-        self.ndx = 0
-
-        self.num_sequences = len(data["premises"])
-        self.data = data
-
-    def __len__(self):
-        return self.num_sequences
-
-    def __getitem__(self, index):
-        return {"id": self.data["ids"][index],
-                "premises": self.data["premises"][index],
-                "premises_lengths": min(self.data['premises_lengths'][index],
-                                      self.data['max_premise_length']),
-                "hypotheses": self.data["hypotheses"][index],
-                "hypotheses_lengths": min(self.data['hypotheses_lengths'][index],
-                                         self.data['max_hypothesis_length']),
-                "labels": self.data["labels"][index],
-                'similarity': self.data["similarity"][index],
-                "max_premise_length": self.data["max_premise_length"],
-                "max_hypothesis_length": self.data["max_hypothesis_length"]
-                }
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        if self.ndx >= self.num_sequences:
-            self.ndx = 0
-            raise StopIteration
-        else:
-            ndx = self.ndx
-            batch_size = self.batch_size
-            l = self.num_sequences
-            self.ndx = self.ndx + self.batch_size
-            return {
-                "ids": self.data["ids"][ndx:min(ndx + batch_size, l)],
-                "premises": self.data["premises"][ndx:min(ndx + batch_size, l)],
-                "premises_lengths": self.data['premises_lengths'][ndx:min(ndx + batch_size, l)],
-                "hypotheses": self.data["hypotheses"][ndx:min(ndx + batch_size, l)],
-                "hypotheses_lengths": self.data['hypotheses_lengths'][ndx:min(ndx + batch_size, l)],
-                "labels": self.data["labels"][ndx:min(ndx + batch_size, l)],
-                "similarity": self.data["similarity"][ndx:min(ndx + batch_size, l)],
-                "max_premise_length": self.data["max_premise_length"],
-                "max_hypothesis_length": self.data["max_hypothesis_length"]
-            }

@@ -125,7 +125,6 @@ def validate(model, dataloader, criterion):
             hypotheses_lengths = batch["hypothesis_length"].to(device)
             labels = batch["label"].to(device)
             similarity = batch["similarity"].to(device)
-
             logits, probs = model(premises,
                                   premises_lengths,
                                   hypotheses,
@@ -281,8 +280,7 @@ def main(train_file,
     # -------------------- Model definition ------------------- #
     print("\t* Building model...")
     with open(embeddings_file, "rb") as pkl:
-        embeddings = torch.tensor(pickle.load(pkl), dtype=torch.float)\
-                     .to(device)
+        embeddings = torch.tensor(pickle.load(pkl), dtype=torch.float).to(device)
 
     model = ESIM(embeddings.shape[0],
                  embeddings.shape[1],
@@ -423,10 +421,10 @@ if __name__ == "__main__":
     parser.add_argument("--checkpoint",
                         default=None,
                         help="Path to a checkpoint file to resume training")
-    parser.add_argument("--proportion", required=True, type=float,
+    parser.add_argument("--proportion", default=1, type=float,
                         help="{Proportion of training data}")
     parser.add_argument("--output",
-                        default=None, type=str, required=True,
+                        default='100', type=str,
                         help="where to Save model")
     args = parser.parse_args()
 

@@ -20,7 +20,6 @@ def preprocess_PI_data(inputdir,
                          ignore_punctuation=False,
                          num_words=None,
                          stopwords=[],
-                         labeldict={},
                          bos=None,
                          eos=None):
     """
@@ -63,7 +62,6 @@ def preprocess_PI_data(inputdir,
                                 ignore_punctuation=ignore_punctuation,
                                 num_words=num_words,
                                 stopwords=stopwords,
-                                labeldict=labeldict,
                                 bos=bos,
                                 eos=eos)
 
@@ -142,7 +140,6 @@ if __name__ == "__main__":
         ignore_punctuation=config["ignore_punctuation"],
         num_words=config["num_words"],
         stopwords=config["stopwords"],
-        labeldict=config["labeldict"],
         bos=config["bos"],
         eos=config["eos"]
     )
