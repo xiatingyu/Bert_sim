@@ -26,3 +26,12 @@ BERT
 
 2.The data we provide cannot be directly used in the BERT model, so further preprocessing is required to adapt to the structure of the BERT model, use `get_similarity.py` in UER folder to further preprocess the data.<br>
 
+3.Then use the following command to run the BERT model<br>
+```python
+python run.py --train_path datasets/msrp/train.tsv 
+--dev_path datasets/msrp/dev.tsv 
+--test_path datasets/msrp/test.tsv 
+--output_model_path models/msrp_100.bin 
+--proportion 1.0
+```
+
