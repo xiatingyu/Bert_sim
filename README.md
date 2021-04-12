@@ -34,4 +34,4 @@ python run.py --train_path datasets/msrp/train.tsv
 --output_model_path models/msrp_100.bin 
 --proportion 1.0
 ```
-
+The pretrained_model can be dowmloaded [here](https://drive.google.com/file/d/1Ko1FyCkTopV7QCWkbJtCKfG9LCgka-gC/view?usp=sharing).
