@@ -10,7 +10,7 @@ ESIM
 
 5.Run under the `ESIM/scripts/training` folder. <br><br>
 ```python
-main_msrp.py --proportion 0.1 --output 10
+python main_msrp.py --proportion 0.1 --output 10
 ```
 `--proportion` specifies the size of the dataset, `--output` determines the storage location of models trained on datasets of different sizes, where 10 is 10% of the data<br>
 You can run `python main_msrp.py` directly, and use the default 100% data at this time.<br><br>
