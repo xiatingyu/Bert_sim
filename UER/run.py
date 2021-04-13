@@ -344,7 +344,6 @@ def main():
     args = load_hyperparam(args)
     print(args.dropout)
 
-
     # Count the number of labels.
     args.labels_num = count_labels_num(args.train_path)
 
