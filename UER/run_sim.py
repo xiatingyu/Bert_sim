@@ -160,10 +160,10 @@ def read_dataset(args, path, isshuffle=False):
     for i in range(len(text_a)):
         #print(i)
         sim = np.array(eval(similarity[i]))
-        src_a = [args.vocab.get(t) for t in args.tokenizer.tokenize(text_a[i])]
+        src_a = [args.vocab.get(t) for t in args.tokenizer.tokenize(text_a[i].lower().translate(str.maketrans('', '', string.punctuation)))]
         # print(args.tokenizer.convert_ids_to_tokens(src_a))
         src_a = [CLS_ID] + src_a + [SEP_ID]
-        src_b = [args.vocab.get(t) for t in args.tokenizer.tokenize(text_b[i])]
+        src_b = [args.vocab.get(t) for t in args.tokenizer.tokenize(text_b[i].lower().translate(str.maketrans('', '', string.punctuation)))]
         src_b = src_b + [SEP_ID]
         src = src_a + src_b
         seg = [1] * len(src_a) + [2] * len(src_b)
@@ -174,6 +174,7 @@ def read_dataset(args, path, isshuffle=False):
             seg = seg[:args.seq_length]
             sim_matrix[:args.seq_length, :args.seq_length] = sim[:args.seq_length, :args.seq_length]
         else:
+            print(sim.shape)
             sim_matrix[:len(seg), :len(seg)] = sim
         while len(src) < args.seq_length:
             src.append(0)
@@ -257,7 +258,7 @@ def main():
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     # Path options.
-    parser.add_argument("--pretrained_model_path", default="./models/google_model_en_uncased_base.bin", type=str,
+    parser.add_argument("--pretrained_model_path", default="./models/English_uncased_base_model.bin", type=str,
                         help="Path of the pretrained model.")
     parser.add_argument("--output_model_path", default="./models/classifier_model.bin", type=str,
                         help="Path of the output model.")

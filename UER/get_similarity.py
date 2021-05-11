@@ -83,6 +83,7 @@ def get_similarity(left_lsent, right_lsent):
 
 
 def output(todir, test):
+
     test_a, test_b, test_similarity = test['text_a'], test['text_b'], test['similarity']
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("--tokenizer", choices=["bert", "char", "space"], default="bert",
@@ -108,8 +109,8 @@ def output(todir, test):
             test['sim'][idx] = ''
             ids.append(idx)
             continue
-        text_a = text_a.split()
-        text_b = text_b.split()
+        text_a = text_a.lower().translate(str.maketrans('', '', string.punctuation)).split()
+        text_b = text_b.lower().translate(str.maketrans('', '', string.punctuation)).split()
         text = ['[CLS]'] + text_a + ['[SEP]'] + text_b + ['[SEP]']
 
         tmp_sim = np.ones((len(text), len(text)))
@@ -145,7 +146,7 @@ def output(todir, test):
 
 
 if __name__ == '__main__':
-    task = 'quora'
+    task = 'msrp'
 
     if task=='quora':
         '''test = pd.read_csv('./datasets/quora/train_sim.csv', sep='\t', encoding="utf-8", dtype=str)
@@ -171,30 +172,15 @@ if __name__ == '__main__':
         output('./datasets/url/test_sim.csv', test)
 
     if task == 'msrp':
-        train = pd.read_csv('./datasets/msrp/train_similarity.tsv', sep='\t', encoding="utf-8", dtype=str, index_col=0)
-        dev = pd.read_csv('./datasets/msrp/dev_similarity.tsv', sep='\t', encoding="utf-8", dtype=str, index_col=0)
-        test = pd.read_csv('./datasets/msrp/test_similarity.tsv', sep='\t', encoding="utf-8", dtype=str, index_col=0)
-        output('./datasets/msrp/train_sim.tsv', train)
+        train = pd.read_csv('./datasets/msrp/train_similarity.tsv', sep='\t', encoding="utf-8", dtype=str)
+        dev = pd.read_csv('./datasets/msrp/dev_similarity.tsv', sep='\t', encoding="utf-8", dtype=str)
+        test = pd.read_csv('./datasets/msrp/test_similarity.tsv', sep='\t', encoding="utf-8", dtype=str)
+
+        
         output('./datasets/msrp/dev_sim.tsv', dev)
         output('./datasets/msrp/test_sim.tsv', test)
+        output('./datasets/msrp/train_sim.tsv', train)
 
 
-    if task == 'snli':
-        train = pd.read_csv('./datasets/snli_no_stop/train_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        dev = pd.read_csv('./datasets/snli_no_stop/dev_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        test = pd.read_csv('./datasets/snli_no_stop/test_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        output('./datasets/snli_no_stop/train_sim.csv', train)
-        output('./datasets/snli_no_stop/dev_sim.csv', dev)
-        output('./datasets/snli_no_stop/test_sim.csv', test)
 
-    if task == 'mnli':
-        train = pd.read_csv('./datasets/mnli/train_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        dev = pd.read_csv('./datasets/mnli/dev_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        dev_m = pd.read_csv('./datasets/mnli/dev_m_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-        dev_um = pd.read_csv('./datasets/mnli/dev_um_similarity.csv', sep='\t', encoding="utf-8", dtype=str)
-
-        output('./datasets/quora/dev_sim.csv', dev)
-        output('./datasets/quora/dev_m_sim.csv', dev_m)
-        output('./datasets/quora/dev_um_sim.csv', dev_um)
-        output('./datasets/quora/train_sim.csv', train)
 
