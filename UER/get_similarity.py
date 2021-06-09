@@ -118,7 +118,7 @@ def output(todir, test):
         #similarity = np.array(eval(sim))
         similarity = np.array(eval(test_similarity[idx]))
         tmp_sim[:len(text_a) + 2, len(text_a) + 1:] = similarity
-        tmp_sim[len(text_a) + 2:, :len(text_a) + 1] = similarity.T[1:, 1:]
+        tmp_sim[len(text_a) + 1:, :len(text_a) + 2] = similarity.T
 
         tag_a = []
         for i in range(len(text)):
