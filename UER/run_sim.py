@@ -314,7 +314,7 @@ def main():
     # Training options.
     parser.add_argument("--dropout", type=float, default=0.5,
                         help="Dropout.")
-    parser.add_argument("--epochs_num", type=int, default=3,
+    parser.add_argument("--epochs_num", type=int, default=30,
                         help="Number of epochs.")
     parser.add_argument("--report_steps", type=int, default=1000,
                         help="Specific steps to print prompt.")
