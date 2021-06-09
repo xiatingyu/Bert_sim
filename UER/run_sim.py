@@ -174,7 +174,7 @@ def read_dataset(args, path, isshuffle=False):
             seg = seg[:args.seq_length]
             sim_matrix[:args.seq_length, :args.seq_length] = sim[:args.seq_length, :args.seq_length]
         else:
-            print(sim.shape)
+            #print(sim.shape)
             sim_matrix[:len(seg), :len(seg)] = sim
         while len(src) < args.seq_length:
             src.append(0)
