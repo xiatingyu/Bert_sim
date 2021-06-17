@@ -39,7 +39,7 @@ The pretrained_model can be dowmloaded [here](https://drive.google.com/file/d/1K
 Citation
 ----
 If you use this code, please cite this paper:
-```python
+
 @inproceedings{xia2021using,
   title={Using Prior Knowledge to Guide BERT’s Attention in Semantic Textual Matching Tasks},
   author={Xia, Tingyu and Wang, Yue and Tian, Yuan and Chang, Yi},
@@ -47,4 +47,4 @@ If you use this code, please cite this paper:
   pages={2466--2475},
   year={2021}
 }
-```
+
