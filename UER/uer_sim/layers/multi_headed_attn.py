@@ -54,11 +54,14 @@ class MultiHeadedAttention(nn.Module):
                              for l, x in zip(self.linear_layers, (query, key, value))
                             ]
         scores = torch.matmul(query, key.transpose(-2, -1))
-        scores = scores / math.sqrt(float(per_head_size))
-        #scores = (scores + torch.mul(scores, similarity))/2 + mask
-        if similarity != None:
-            scores = torch.mul(scores, similarity) + mask
+        scores = scores / math.sqrt(float(per_head_size)) + mask
+
         probs = nn.Softmax(dim=-1)(scores)
+        if similarity != None:
+            # print(probs)
+            # probs = torch.mul(scores, probs)
+            probs = nn.Softmax(dim=-1)(torch.mul(scores, probs))
+
         #test = torch.mul(probs, similarity)
         probs = self.dropout(probs)
 
