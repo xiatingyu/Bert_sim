@@ -36,4 +36,15 @@ python run.py --train_path datasets/msrp/train.tsv
 ```
 The pretrained_model can be dowmloaded [here](https://drive.google.com/file/d/1Ko1FyCkTopV7QCWkbJtCKfG9LCgka-gC/view?usp=sharing).
 
-
+Citation
+----
+If you use this code, please cite this paper:
+```
+@inproceedings{xia2021using,
+  title={Using Prior Knowledge to Guide BERT’s Attention in Semantic Textual Matching Tasks},
+  author={Xia, Tingyu and Wang, Yue and Tian, Yuan and Chang, Yi},
+  booktitle={Proceedings of the Web Conference 2021},
+  pages={2466--2475},
+  year={2021}
+}
+```
